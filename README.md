@@ -6,4 +6,6 @@ Initially its gonna be a single player version. The player sees a grid of 16 fac
 
 For the beginning its gonna be identical cards that have to be found. Then it should be matching cards with the same mushroom, but not identical. Maybe one has the name and the other the picture. Or it is two pictures of the same mushroom but not the same picture.
 
+For the beginning the pictures are gonna be stored in the repository and in fixed positions. Then the placement is gonna be randomized. Then the pictures and mushrooms that are included are gonna be randomized. Then the pictures are gonna be stored in a datastore.
+
 For a multiplayer version (in front of one computer still) the players can set the number of players and then uncover the cards in turns. If a player finds a matching pair they get another turn. Otherwise the next player's turn. But that is Zukunftsmusik.
