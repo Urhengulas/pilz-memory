@@ -1,23 +1,15 @@
-const imagePairs = [
-    { src: "./pilze/fliegenpilz/fliegenpilz-02.jpg", id: 1 },
-    { src: "./pilze/fliegenpilz/fliegenpilz-03.jpg", id: 1 },
-    { src: "./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-1.jpg", id: 2 },
-    { src: "./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-2.jpg", id: 2 },
-    { src: "./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-1.jpg", id: 3 },
-    { src: "./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-2.jpg", id: 3 },
-    { src: "./pilze/judasohr/judasohr-1.jpg", id: 4 },
-    { src: "./pilze/judasohr/judasohr-2.jpg", id: 4 },
-    { src: "./pilze/schopf-tintling/schopf-tintling-01.jpg", id: 5 },
-    { src: "./pilze/schopf-tintling/schopf-tintling-02.jpg", id: 5 },
-    { src: "./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg", id: 6 },
-    { src: "./pilze/wiesen-champignon.jpg/wiesen-champignon-2.jpg", id: 6 },
-    { src: "./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-1.jpg", id: 7 },
-    { src: "./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-2.jpg", id: 7 },
-    { src: "./pilze/gruenling/gruenling-1.jpg", id: 8 },
-    { src: "./pilze/gruenling/gruenling-2.jpg", id: 8 }
+const mushrooms = [
+    { name: "Fliegenpilz", image: "./pilze/fliegenpilz/fliegenpilz-02.jpg" },
+    { name: "Gewöhnliche Stinkmorchel", image: "./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-1.jpg" },
+    { name: "Grüner Knollenblätterpilz", image: "./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-1.jpg" },
+    { name: "Judasohr", image: "./pilze/judasohr/judasohr-1.jpg" },
+    { name: "Schopf Tintling", image: "./pilze/schopf-tintling/schopf-tintling-01.jpg" },
+    { name: "Wiesen Champignon", image: "./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg" },
+    { name: "Amethystfarbene Wiesenkoralle", image: "./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-1.jpg" },
+    { name: "Grünling", image: "./pilze/gruenling/gruenling-1.jpg" }
 ];
 
-// Function to shuffle the array
+// Shuffle the array
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -28,78 +20,93 @@ function shuffle(array) {
 // Generate grid items
 function generateGrid() {
     const gridContainer = document.getElementById('grid-container');
+    const cards = [];
 
-    // Shuffle the image pairs
-    shuffle(imagePairs);
+    // Create cards for each mushroom
+    mushrooms.forEach(({ name, image }, index) => {
+        cards.push({ type: 'image', name, id: index, src: image });
+        cards.push({ type: 'text', name, id: index });
+    });
+
+    // Shuffle the cards
+    shuffle(cards);
 
     // Create grid items
-    imagePairs.forEach(({ src, id }) => {
+    cards.forEach(({ type, src, name, id }) => {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
         gridItem.setAttribute('onclick', 'revealImage(this)');
-
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `Image ${id}`;
-        img.setAttribute('data-id', id);
+        gridItem.setAttribute('data-id', id);
 
         const cover = document.createElement('div');
         cover.classList.add('cover');
         cover.textContent = 'Click to Reveal';
 
-        gridItem.appendChild(img);
+        if (type === 'image') {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = name;
+            gridItem.appendChild(img);
+        } else if (type === 'text') {
+            const text = document.createElement('div');
+            text.textContent = name;
+            gridItem.appendChild(text);
+        }
+
         gridItem.appendChild(cover);
         gridContainer.appendChild(gridItem);
     });
 }
 
-let firstImage = null;
-let secondImage = null;
+let firstCard = null;
+let secondCard = null;
 
+// Function to reveal the image or text
 function revealImage(element) {
+    // Prevent revealing more than two cards at a time
+    if (firstCard && secondCard) return;
+
     const cover = element.querySelector('.cover');
 
     // Ignore clicks if the cover is already removed
     if (cover.classList.contains('hidden')) return;
 
+    // Hide the cover, therefore uncover the card
     cover.classList.add('hidden');
 
-    // Set firstImage or secondImage based on previous clicks
-    if (!firstImage) {
-        firstImage = element;
-    } else if (!secondImage && element !== firstImage) {
-        secondImage = element;
+    if (!firstCard) {
+        firstCard = element;
+    } else {
+        secondCard = element;
         checkMatch();
     }
 }
 
 function checkMatch() {
-    const id1 = firstImage.querySelector('img').dataset.id;
-    const id2 = secondImage.querySelector('img').dataset.id;
+    const firstId = firstCard.getAttribute('data-id');
+    const secondId = secondCard.getAttribute('data-id');
 
-    if (id1 === id2) {
-        // If images match, remove them from the grid
+    if (firstId === secondId) {
+        // Match found, hide the cards
         setTimeout(() => {
-            firstImage.style.visibility = 'hidden';
-            secondImage.style.visibility = 'hidden';
-            resetSelections();
+            firstCard.style.visibility = 'hidden';
+            secondCard.style.visibility = 'hidden';
+            resetCards();
         }, 500);
     } else {
-        // If images don't match, cover them again
+        // No match, cover the cards again
         setTimeout(() => {
-            firstImage.querySelector('.cover').classList.remove('hidden');
-            secondImage.querySelector('.cover').classList.remove('hidden');
-            resetSelections();
+            firstCard.querySelector('.cover').classList.remove('hidden');
+            secondCard.querySelector('.cover').classList.remove('hidden');
+            resetCards();
         }, 1000);
     }
 }
 
-function resetSelections() {
-    firstImage = null;
-    secondImage = null;
+function resetCards() {
+    firstCard = null;
+    secondCard = null;
 }
 
 // Initialize the game
-generateGrid();
-
-
+document.addEventListener('DOMContentLoaded', generateGrid);
