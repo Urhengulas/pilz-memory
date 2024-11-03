@@ -1,12 +1,48 @@
+class Mushroom {
+    constructor(name, image) {
+        this.name = name;
+        this.image = image;
+    }
+
+    createCard(id, content) {
+        const gridItem = document.createElement('div');
+        gridItem.classList.add('grid-item');
+        gridItem.setAttribute('data-id', id);
+        gridItem.setAttribute('onclick', 'revealImage(this)');
+
+        const cover = document.createElement('div');
+        cover.classList.add('cover');
+        cover.textContent = 'Click to Reveal';
+
+        gridItem.appendChild(content);
+        gridItem.appendChild(cover);
+
+        return gridItem;
+    }
+
+    createImageCard(id) {
+        const img = document.createElement('img');
+        img.src = this.image;
+        img.alt = this.name;
+        return this.createCard(id, img);
+    }
+
+    createTextCard(id) {
+        const text = document.createElement('div');
+        text.textContent = this.name;
+        return this.createCard(id, text);
+    }
+}
+
 const mushrooms = [
-    { name: "Fliegenpilz", image: "./pilze/fliegenpilz/fliegenpilz-02.jpg" },
-    { name: "Gewöhnliche Stinkmorchel", image: "./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-1.jpg" },
-    { name: "Grüner Knollenblätterpilz", image: "./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-1.jpg" },
-    { name: "Judasohr", image: "./pilze/judasohr/judasohr-1.jpg" },
-    { name: "Schopf Tintling", image: "./pilze/schopf-tintling/schopf-tintling-01.jpg" },
-    { name: "Wiesen Champignon", image: "./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg" },
-    { name: "Amethystfarbene Wiesenkoralle", image: "./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-1.jpg" },
-    { name: "Grünling", image: "./pilze/gruenling/gruenling-1.jpg" }
+    new Mushroom("Fliegenpilz", "./pilze/fliegenpilz/fliegenpilz-02.jpg"),
+    new Mushroom("Gewöhnliche Stinkmorchel", "./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-1.jpg"),
+    new Mushroom("Grüner Knollenblätterpilz", "./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-1.jpg"),
+    new Mushroom("Judasohr", "./pilze/judasohr/judasohr-1.jpg"),
+    new Mushroom("Schopf Tintling", "./pilze/schopf-tintling/schopf-tintling-01.jpg"),
+    new Mushroom("Wiesen Champignon", "./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg"),
+    new Mushroom("Amethystfarbene Wiesenkoralle", "./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-1.jpg"),
+    new Mushroom("Grünling", "./pilze/gruenling/gruenling-1.jpg")
 ];
 
 // Shuffle the array
@@ -23,38 +59,17 @@ function generateGrid() {
     const cards = [];
 
     // Create cards for each mushroom
-    mushrooms.forEach(({ name, image }, index) => {
-        cards.push({ type: 'image', name, id: index, src: image });
-        cards.push({ type: 'text', name, id: index });
+    mushrooms.forEach((mushroom, index) => {
+        cards.push(mushroom.createImageCard(index));
+        cards.push(mushroom.createTextCard(index));
     });
 
     // Shuffle the cards
     shuffle(cards);
 
-    // Create grid items
-    cards.forEach(({ type, src, name, id }) => {
-        const gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
-        gridItem.setAttribute('onclick', 'revealImage(this)');
-        gridItem.setAttribute('data-id', id);
-
-        const cover = document.createElement('div');
-        cover.classList.add('cover');
-        cover.textContent = 'Click to Reveal';
-
-        if (type === 'image') {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = name;
-            gridItem.appendChild(img);
-        } else if (type === 'text') {
-            const text = document.createElement('div');
-            text.textContent = name;
-            gridItem.appendChild(text);
-        }
-
-        gridItem.appendChild(cover);
-        gridContainer.appendChild(gridItem);
+    // Append grid items to the container
+    cards.forEach(card => {
+        gridContainer.appendChild(card);
     });
 }
 
@@ -63,7 +78,6 @@ let secondCard = null;
 
 // Function to reveal the image or text
 function revealImage(element) {
-    // Prevent revealing more than two cards at a time
     if (firstCard && secondCard) return;
 
     const cover = element.querySelector('.cover');
