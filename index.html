@@ -58,84 +58,125 @@
 </head>
 
 <body>
-    <h1>Pilz memory 🍄</h1>
+    <h1>Pilz Memory 🍄</h1>
     <div class="grid-container">
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/fliegenpilz/fliegenpilz-02.jpg" alt="Fliegenpilz 2">
+            <img src="./pilze/fliegenpilz/fliegenpilz-02.jpg" alt="Fliegenpilz 2" data-id="1">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/fliegenpilz/fliegenpilz-03.jpg" alt="Fliegenpilz 3">
+            <img src="./pilze/fliegenpilz/fliegenpilz-03.jpg" alt="Fliegenpilz 3" data-id="1">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
             <img src="./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-1.jpg"
-                alt="Gewöhnliche Stinkmorchel 1">
+                alt="Gewöhnliche Stinkmorchel 1" data-id="2">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
             <img src="./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-2.jpg"
-                alt="Gewöhnliche Stinkmorchel 2">
+                alt="Gewöhnliche Stinkmorchel 2" data-id="2">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
             <img src="./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-1.jpg"
-                alt="Grüner Knollenblaetterpilz 1">
+                alt="Grüner Knollenblaetterpilz 1" data-id="3">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
             <img src="./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-2.jpg"
-                alt="Grüner Knollenblaetterpilz 2">
+                alt="Grüner Knollenblaetterpilz 2" data-id="3">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/judasohr/judasohr-1.jpg" alt="Judasohr 1">
+            <img src="./pilze/judasohr/judasohr-1.jpg" alt="Judasohr 1" data-id="4">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/judasohr/judasohr-2.jpg" alt="Judasohr 2">
+            <img src="./pilze/judasohr/judasohr-2.jpg" alt="Judasohr 2" data-id="4">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/schopf-tintling/schopf-tintling-01.jpg" alt="Schopf Tintling 1">
+            <img src="./pilze/schopf-tintling/schopf-tintling-01.jpg" alt="Schopf Tintling 1" data-id="5">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/schopf-tintling/schopf-tintling-02.jpg" alt="Schopf Tintling 2">
+            <img src="./pilze/schopf-tintling/schopf-tintling-02.jpg" alt="Schopf Tintling 2" data-id="5">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg" alt="Wiesen Champignon 1">
+            <img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg" alt="Wiesen Champignon 1" data-id="6">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-2.jpg" alt="Wiesen Champignon 2">
+            <img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-2.jpg" alt="Wiesen Champignon 2" data-id="6">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
             <img src="./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-1.jpg"
-                alt="Amethystfarbene Wiesenkoralle 1">
+                alt="Amethystfarbene Wiesenkoralle 1" data-id="7">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
             <img src="./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-2.jpg"
-                alt="Amethystfarbene Wiesenkoralle 2">
+                alt="Amethystfarbene Wiesenkoralle 2" data-id="7">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/gruenling/gruenling-1.jpg" alt="Grünling 1">
+            <img src="./pilze/gruenling/gruenling-1.jpg" alt="Grünling 1" data-id="8">
             <div class="cover">Click to Reveal</div>
         </div>
         <div class="grid-item" onclick="revealImage(this)">
-            <img src="./pilze/gruenling/gruenling-2.jpg" alt="Grünling 2">
+            <img src="./pilze/gruenling/gruenling-2.jpg" alt="Grünling 2" data-id="8">
             <div class="cover">Click to Reveal</div>
         </div>
     </div>
 
     <script>
+        let firstImage = null;
+        let secondImage = null;
+
         function revealImage(element) {
             const cover = element.querySelector('.cover');
-            cover.classList.toggle('hidden'); // Toggle the hidden class on the cover
+
+            // Ignore clicks if the cover is already removed
+            if (cover.classList.contains('hidden')) return;
+
+            cover.classList.add('hidden');
+
+            // Set firstImage or secondImage based on previous clicks
+            if (!firstImage) {
+                firstImage = element;
+            } else if (!secondImage && element !== firstImage) {
+                secondImage = element;
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const id1 = firstImage.querySelector('img').dataset.id;
+            const id2 = secondImage.querySelector('img').dataset.id;
+
+            if (id1 === id2) {
+                // If images match, remove them from the grid
+                setTimeout(() => {
+                    firstImage.style.visibility = 'hidden';
+                    secondImage.style.visibility = 'hidden';
+                    resetSelections();
+                }, 500);
+            } else {
+                // If images don't match, cover them again
+                setTimeout(() => {
+                    firstImage.querySelector('.cover').classList.remove('hidden');
+                    secondImage.querySelector('.cover').classList.remove('hidden');
+                    resetSelections();
+                }, 1000);
+            }
+        }
+
+        function resetSelections() {
+            firstImage = null;
+            secondImage = null;
         }
     </script>
 </body>
