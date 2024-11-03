@@ -56,13 +56,12 @@ function shuffle(array) {
 // Generate grid items
 function generateGrid() {
     const gridContainer = document.getElementById('grid-container');
-    const cards = [];
 
     // Create cards for each mushroom
-    mushrooms.forEach((mushroom, index) => {
-        cards.push(mushroom.createImageCard(index));
-        cards.push(mushroom.createTextCard(index));
-    });
+    const cards = mushrooms.flatMap((mushroom, index) => [
+        mushroom.createImageCard(index),
+        mushroom.createTextCard(index)]
+    );
 
     // Shuffle the cards
     shuffle(cards);
