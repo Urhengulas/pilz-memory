@@ -17,9 +17,35 @@
 
         /* Style for each grid item */
         .grid-item {
+            position: relative;
             align-items: center;
             display: flex;
             justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Cover overlay */
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hide cover when clicked */
+        .cover.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Ensure the images have a consistent size */
@@ -34,31 +60,84 @@
 <body>
     <h1>Pilz memory 🍄</h1>
     <div class="grid-container">
-        <div class="grid-item"><img src="./pilze/fliegenpilz/fliegenpilz-02.jpg" alt="Fliegenpilz 2"></div>
-        <div class="grid-item"><img src="./pilze/fliegenpilz/fliegenpilz-03.jpg" alt="Fliegenpilz 3"></div>
-        <div class="grid-item"><img src="./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-1.jpg"
-                alt="Gewöhnliche Stinkmorchel 1"></div>
-        <div class="grid-item"><img src="./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-2.jpg"
-                alt="Gewöhnliche Stinkmorchel 2"></div>
-        <div class="grid-item"><img src="./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-1.jpg"
-                alt="Grüner Knollenblaetterpilz 1"></div>
-        <div class="grid-item"><img src="./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-2.jpg"
-                alt="Grüner Knollenblaetterpilz 2"></div>
-        <div class="grid-item"><img src="./pilze/judasohr/judasohr-1.jpg" alt="Judasohr 1"></div>
-        <div class="grid-item"><img src="./pilze/judasohr/judasohr-2.jpg" alt="Judasohr 2"></div>
-        <div class="grid-item"><img src="./pilze/schopf-tintling/schopf-tintling-01.jpg" alt="Schopf Tintling 1"></div>
-        <div class="grid-item"><img src="./pilze/schopf-tintling/schopf-tintling-02.jpg" alt="Schopf Tintling 2"></div>
-        <div class="grid-item"><img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg"
-                alt="Wiesen Champignon 1"></div>
-        <div class="grid-item"><img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-2.jpg"
-                alt="Wiesen Champignon 2"></div>
-        <div class="grid-item"><img src="./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-1.jpg"
-                alt="Amethystfarbene Wiesenkoralle 1"></div>
-        <div class="grid-item"><img src="./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-2.jpg"
-                alt="Amethystfarbene Wiesenkoralle 2"></div>
-        <div class="grid-item"><img src="./pilze/gruenling/gruenling-1.jpg" alt="Grünling 1"></div>
-        <div class="grid-item"><img src="./pilze/gruenling/gruenling-2.jpg" alt="Grünling 2"></div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/fliegenpilz/fliegenpilz-02.jpg" alt="Fliegenpilz 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/fliegenpilz/fliegenpilz-03.jpg" alt="Fliegenpilz 3">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-1.jpg"
+                alt="Gewöhnliche Stinkmorchel 1">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/gewoehnliche-stinkmorchel/gewoehnliche-stinkmorchel-2.jpg"
+                alt="Gewöhnliche Stinkmorchel 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-1.jpg"
+                alt="Grüner Knollenblaetterpilz 1">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/gruener-knollenblaetterpilz/gruener-knollenblaetterpilz-2.jpg"
+                alt="Grüner Knollenblaetterpilz 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/judasohr/judasohr-1.jpg" alt="Judasohr 1">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/judasohr/judasohr-2.jpg" alt="Judasohr 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/schopf-tintling/schopf-tintling-01.jpg" alt="Schopf Tintling 1">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/schopf-tintling/schopf-tintling-02.jpg" alt="Schopf Tintling 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-1.jpg" alt="Wiesen Champignon 1">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/wiesen-champignon.jpg/wiesen-champignon-2.jpg" alt="Wiesen Champignon 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-1.jpg"
+                alt="Amethystfarbene Wiesenkoralle 1">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/amethustfarbene-wiesenkoralle/amethystfarbene-wiesenkoralle-2.jpg"
+                alt="Amethystfarbene Wiesenkoralle 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/gruenling/gruenling-1.jpg" alt="Grünling 1">
+            <div class="cover">Click to Reveal</div>
+        </div>
+        <div class="grid-item" onclick="revealImage(this)">
+            <img src="./pilze/gruenling/gruenling-2.jpg" alt="Grünling 2">
+            <div class="cover">Click to Reveal</div>
+        </div>
     </div>
+
+    <script>
+        function revealImage(element) {
+            const cover = element.querySelector('.cover');
+            cover.classList.toggle('hidden'); // Toggle the hidden class on the cover
+        }
+    </script>
 </body>
 
 </html>
