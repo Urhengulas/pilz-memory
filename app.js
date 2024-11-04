@@ -74,6 +74,7 @@ function generateGrid() {
 
 let firstCard = null;
 let secondCard = null;
+let attempts = 0;
 
 // Function to reveal the image or text
 function revealImage(element) {
@@ -95,6 +96,12 @@ function revealImage(element) {
     }
 }
 
+function incrementAttempts() {
+    const attemptsDisplay = document.getElementById('attempts-display');
+    attempts++;
+    attemptsDisplay.textContent = `Attempts: ${attempts}`;
+}
+
 function checkMatch() {
     const firstId = firstCard.getAttribute('data-id');
     const secondId = secondCard.getAttribute('data-id');
@@ -113,6 +120,7 @@ function checkMatch() {
             secondCard.querySelector('.cover').classList.remove('hidden');
             resetCards();
         }, 1000);
+        incrementAttempts();
     }
 }
 

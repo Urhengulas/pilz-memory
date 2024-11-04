@@ -1,3 +1,9 @@
+#attempts-display {
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
 /* Cover overlay */
 .cover {
     position: absolute;
